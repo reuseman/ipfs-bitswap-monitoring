@@ -65,7 +65,10 @@ def partners_to_df(partners, df_old=pd.DataFrame()):
             value = partners[cid][col]
             # Removes "ms"
             if col == "Latency":
-                value = value[:-2]
+                if value.endswith("ms"):
+                    value = value[:-2]
+                if value.endswith("s"):
+                    value = value[:-1]
             data[col].append(value)
 
     df = pd.DataFrame(data)
